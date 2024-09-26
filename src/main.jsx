@@ -26,8 +26,10 @@ const App = () => {
   return(
     <div>
       <div>
+        {/* Se solicita el valor del contador desde la store */}
         {store.getState()}
       </div>
+      {/* Los controladores de acciones de los botones envian las acciones correctas al store */}
       <button onClick={() => store.dispatch({type: 'INCREMENT'})}>
         plus
       </button>
@@ -67,9 +69,13 @@ store.dispatch({
 
 const root = createRoot(document.getElementById('root'))
 
+// Cuando se cambia el estado del store, React no puede volver a re-renderizar automaticamente la aplicacion.
 const renderApp = () => {
   root.render(<App />)
 }
 
+// Se renderiza por primera vez la aplicacion
 renderApp()
+
+// Se registra la funcion que renderiza toda la aplicacion para escuchar cambios en el store con el metodo `store.subscribe`
 store.subscribe(renderApp)
